@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor"> 
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor"> 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <PackageId>TailBlazor.RadioButton</PackageId>
@@ -28,7 +28,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <None Include="..\..\logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="">
+      <LinkBase>assets</LinkBase>
+    </None>
   </ItemGroup>
-
 </Project>
