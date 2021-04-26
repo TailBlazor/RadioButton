@@ -1,9 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor"> 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <PackageId>TailBlazor.RadioButton</PackageId>
+    <RootNamespace>TailBlazor.RadioButton</RootNamespace>
+    <Version>1.0.0</Version>
+    <Authors>Rogerio Ribeiro</Authors>
+    <IsPackage>true</IsPackage>
+    <PackageTags>Blazor; TailBlazorcss; TailBlazor css; tailwind; tailwindcss; RadioButton; radio; Radio; Radio Button;</PackageTags>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/TailBlazor/RadioButton</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/TailBlazor/RadioButton</RepositoryUrl>
+    <Description>A Blazor radio button component based off TailWindCss. It has the bare minimum styles to function with the option to add your own classes. It's built so it can be fully customizable and reusable.</Description>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <PackageIcon>logo.png</PackageIcon>
   </PropertyGroup>
 
-  
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
