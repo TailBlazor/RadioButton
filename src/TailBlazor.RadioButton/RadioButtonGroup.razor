@@ -1,0 +1,23 @@
+﻿<fieldset id="@(Id)" class="@(Class)">
+    @ChildContent
+</fieldset>
+
+@code {
+    /// <summary>
+    /// The id for the group.
+    /// </summary>
+    [Parameter]
+    public string Id { get; set; }
+
+    /// <summary>
+    /// The class for the group.
+    /// </summary>
+    [Parameter]
+    public string Class { get; set; }
+
+    /// <summary>
+    /// The child content of the group.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

@@ -1,0 +1,51 @@
+﻿<div>
+    <legend class="@(ReturnClass())">@(Label)</legend>
+    @if (!SubLabel.IsEmpty())
+    {
+        <p class="@(ReturnSubLabelClass())">
+            @(SubLabel))
+        </p>
+    }
+</div>
+
+@code {
+    #region parameter(s)
+    /// <summary>
+    /// The class for the group label. This will override any default classes.
+    /// </summary>
+    [Parameter]
+    public string Class { get; set; }
+
+    /// <summary>
+    /// The label text.
+    /// </summary>
+    [Parameter]
+    public string Label { get; set; }
+
+    /// <summary>
+    /// The sub label text, goes underneath the main label.
+    /// </summary>
+    [Parameter]
+    public string SubLabel { get; set; }
+
+    /// <summary>
+    /// The class for the sub label. This will override any default classes.
+    /// </summary>
+    [Parameter]
+    public string SubLabelClass { get; set; }
+    #endregion
+
+    #region private function(s)
+    /// <summary>
+    /// Returns the default classes, if Class is not empty then return the custom classes.
+    /// </summary>
+    /// <returns>a string of classes</returns>
+    string ReturnClass() => Class.IsEmpty() ? "text-base font-medium text-gray-900" : Class;
+
+    /// <summary>
+    /// Returns the default classes, if SubLabelClass is not empty then return the custom classes.
+    /// </summary>
+    /// <returns>a string of classes</returns>
+    string ReturnSubLabelClass() => SubLabelClass.IsEmpty() ? "text-sm text-gray-500" : SubLabelClass;
+    #endregion
+}

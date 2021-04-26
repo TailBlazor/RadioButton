@@ -1,0 +1,112 @@
+﻿@typeparam TValue
+
+<div class="@(ReturnClass()) @(Orientation.GetClass())">
+    <CascadingValue Value="this">
+        @if (Items != null && 
+            Items?.Count() > 0)
+        {
+            @foreach(RadioItem<TValue> item in Items)
+            {
+                <RadioButton TValue="TValue" InputId="@(item.Id)" Value="@(item.Value)" Label="@(item.Text)"></RadioButton>
+            }
+        }
+        else
+        {
+            @ChildContent(this)
+        }
+    </CascadingValue>
+</div>
+
+@code {
+    #region private variable(s)
+    // Defaults
+    private RadioButtonOrientation _orientation = RadioButtonOrientation.Vertical;
+    private TValue _value;
+    #endregion
+
+    #region parameter(s)
+    /// <summary>
+    /// The value that we are binding to.
+    /// </summary>
+    [Parameter]
+    public TValue Value
+    {
+        get => _value;
+        set
+        {
+            if (_value?.Equals(value) ?? false) return;
+
+            _value = value;
+
+            // set the value
+            ValueChanged.InvokeAsync(value);
+        }
+    }
+
+    /// <summary>
+    /// The class for the container div. This will override any default classes.
+    /// </summary>
+    [Parameter]
+    public string Class { get; set; }
+
+    /// <summary>
+    /// The orientation that we would like to set these radio buttons.
+    /// Default: Vertical
+    /// </summary>
+    [Parameter]
+    public RadioButtonOrientation Orientation
+    {
+        get => _orientation;
+        set
+        {
+            if (Orientation != value)
+            {
+                _orientation = value;
+            }
+        }
+    }
+
+    /// <summary>
+    /// The group name for all the radio buttons that get created.
+    /// </summary>
+    [Parameter]
+    public string GroupName { get; set; }
+
+    /// <summary>
+    /// A list of RadioItems so that we can automatically create the radio buttons.
+    /// </summary>
+    [Parameter]
+    public List<RadioItem<TValue>> Items { get; set; }
+
+    /// <summary>
+    /// A callback function for any customization when a value changes.
+    /// </summary>
+    [Parameter]
+    public EventCallback<TValue> ValueChanged { get; set; }
+
+    /// <summary>
+    /// The child content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment<RadioButtonGroupContainer<TValue>> ChildContent { get; set; }
+    #endregion
+
+    #region public function(s)
+    /// <summary>
+    /// Sets the value, gets called from the child component.
+    /// </summary>
+    /// <param name="value"></param>
+    public void SetCurrentValue(TValue value)
+    {
+        this.Value = value;
+    }
+    #endregion
+
+    #region private function(s)
+    /// <summary>
+    /// Returns the default classes, if Class is not empty then return the custom classes.
+    /// </summary>
+    /// <returns>a string of classes</returns>
+    string ReturnClass() => Class.IsEmpty() ? "mt-4 space-y" : Class;
+    #endregion
+}

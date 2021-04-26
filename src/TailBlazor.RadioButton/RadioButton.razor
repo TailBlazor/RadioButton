@@ -1,0 +1,88 @@
+﻿@typeparam TValue
+
+<div class="flex items-center @(CheckIfHorizontal())">
+    @if (ChildContent == null)
+    {
+        <input type="radio" id="@(InputId)" name="@(RadioButtonGroupContainer.GroupName)" class="@(ReturnInputClass())" value="@(Value)" @onchange="@((ev) => OnChangeHandler(ev))" />
+        <label for="@(InputId)" class="@(ReturnLabelClass())">@(Label)</label>
+    }
+    else
+    {
+        @ChildContent(RadioButtonGroupContainer)
+    }
+</div>
+
+@code {
+    #region parameter(s)
+    /// <summary>
+    /// The parent container.
+    /// </summary>
+    [CascadingParameter]
+    protected RadioButtonGroupContainer<TValue> RadioButtonGroupContainer { get; set; }
+
+    /// <summary>
+    /// The id of the radio input.
+    /// </summary>
+    [Parameter]
+    public string InputId { get; set; }
+
+    /// <summary>
+    /// The class for the radio input. This will override any default classes.
+    /// </summary>
+    [Parameter]
+    public string InputClass { get; set; }
+
+    /// <summary>
+    /// The class for the label for the radio input. This will override any default classes.
+    /// </summary>
+    [Parameter]
+    public string LabelClass { get; set; }
+
+    /// <summary>
+    /// The label text.
+    /// </summary>
+    [Parameter]
+    public string Label { get; set; }
+
+    /// <summary>
+    /// The value of the input.
+    /// </summary>
+    [Parameter]
+    public TValue Value { get; set; }
+
+    /// <summary>
+    /// The custom content, if not using the pre-made content.
+    /// </summary>
+    [Parameter]
+    public RenderFragment<RadioButtonGroupContainer<TValue>> ChildContent { get; set; }
+    #endregion
+
+    #region private function(s)
+    /// <summary>
+    /// Returns the default classes, if InputClass is not empty then return the custom classes.
+    /// </summary>
+    /// <returns>a string of classes</returns>
+    string ReturnInputClass() => InputClass.IsEmpty() ? "focus:ring-blue-500 focus:ring-radioButtonColor h-4 w-4 text-blue-600 text-radioButtonColor border-gray-300" : InputClass;
+
+    /// <summary>
+    /// Returns the default classes, if LabelClass is not empty then return the custom classes.
+    /// </summary>
+    /// <returns></returns>
+    string ReturnLabelClass() => LabelClass.IsEmpty() ? "ml-3 block text-sm font-medium text-gray-700" : LabelClass;
+
+    /// <summary>
+    /// Returns specific margining depending on the orientation of the inputs.
+    /// </summary>
+    /// <returns></returns>
+    string CheckIfHorizontal() => RadioButtonGroupContainer.Orientation == RadioButtonOrientation.Horizontal ? "mr-3" : "mb-1";
+
+    /// <summary>
+    /// Set the value in the parent so that we can bind the value.
+    /// </summary>
+    /// <param name="ev">the event arguments</param>
+    void OnChangeHandler(ChangeEventArgs ev)
+    {
+        RadioButtonGroupContainer?.SetCurrentValue(this.Value);
+    } 
+    #endregion
+}
