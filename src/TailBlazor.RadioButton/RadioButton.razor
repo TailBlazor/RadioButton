@@ -3,7 +3,7 @@
 <div class="flex items-center @(CheckIfHorizontal())">
     @if (ChildContent == null)
     {
-        <input type="radio" id="@(InputId)" name="@(RadioButtonGroupContainer.GroupName)" class="@(ReturnInputClass())" value="@(Value)" @onchange="@((ev) => OnChangeHandler(ev))" />
+        <input type="radio" id="@(InputId)" name="@(RadioButtonGroupContainer?.GroupName)" class="@(ReturnInputClass())" value="@(Value?.ToString().ToLower())" checked="@(RadioButtonGroupContainer.Value?.ToString().ToLower() == Value?.ToString().ToLower())" @onchange="@((ev) => OnChangeHandler(ev))" />
         <label for="@(InputId)" class="@(ReturnLabelClass())">@(Label)</label>
     }
     else
@@ -74,7 +74,7 @@
     /// Returns specific margining depending on the orientation of the inputs.
     /// </summary>
     /// <returns></returns>
-    string CheckIfHorizontal() => RadioButtonGroupContainer.Orientation == RadioButtonOrientation.Horizontal ? "mr-3" : "mb-1";
+    string CheckIfHorizontal() => RadioButtonGroupContainer?.Orientation == RadioButtonOrientation.Horizontal ? "mr-3" : "mb-1";
 
     /// <summary>
     /// Set the value in the parent so that we can bind the value.

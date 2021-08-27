@@ -1,10 +1,16 @@
 ﻿<div>
-    <legend class="@(ReturnClass())">@(Label)</legend>
-    @if (!SubLabel.IsEmpty())
+    @if (!Label.IsEmpty())
     {
-        <p class="@(ReturnSubLabelClass())">
-            @(SubLabel))
-        </p>
+        <legend class="@(ReturnClass())">@(Label)</legend>
+        @if (!SubLabel.IsEmpty())
+        {
+            <p class="@(ReturnSubLabelClass())">
+                @(SubLabel))
+            </p>
+        }
+    } else
+    {
+        @ChildContent
     }
 </div>
 
@@ -27,6 +33,9 @@
     /// </summary>
     [Parameter]
     public string SubLabel { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// The class for the sub label. This will override any default classes.

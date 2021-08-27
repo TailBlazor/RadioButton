@@ -39,9 +39,12 @@
             _value = value;
 
             // set the value
-            ValueChanged.InvokeAsync(value);
+            if(_value != null)
+                ValueChanged.InvokeAsync(value);
         }
     }
+    //[Parameter]
+    //public TValue Value { get; set; }
 
     /// <summary>
     /// The class for the container div. This will override any default classes.
