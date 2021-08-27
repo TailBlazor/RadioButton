@@ -3,7 +3,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <PackageId>TailBlazor.RadioButton</PackageId>
     <RootNamespace>TailBlazor.RadioButton</RootNamespace>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Rogerio Ribeiro</Authors>
     <IsPackage>true</IsPackage>
     <PackageTags>Blazor; TailBlazorcss; TailBlazor css; tailwind; tailwindcss; RadioButton; radio; Radio; Radio Button;</PackageTags>
